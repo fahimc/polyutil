@@ -1,0 +1,41 @@
+{
+  "name": "polyutil",
+  "version": "1.0.0",
+  "description": "this is a npm polymer util to build polymer components and release them",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "polyutil": "./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fahimc/polyutil.git"
+  },
+  "keywords": [
+    "polymer",
+    "utils",
+    "polymerextend"
+  ],
+  "author": "Fahim Chowdhury <fahim.chowdhury1985@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fahimc/polyutil/issues"
+  },
+  "dependencies": {
+    "shelljs": "^0.6.0",
+    "express": "^3.4.8",
+    "body-parser": "^1.14.2",
+    "grunt": "^0.4.5",
+    "grunt-confirm": "^1.0.2",
+    "grunt-contrib-copy": "^0.8.1",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-eslint": "^17.1.0",
+    "grunt-replace": "^0.10.2",
+    "open": "^0.0.5",
+    "grunt-shell-spawn": "^0.3.9",
+    "method-override": "^2.3.5"
+  },
+  "homepage": "https://github.com/fahimc/polyutil"
+}
