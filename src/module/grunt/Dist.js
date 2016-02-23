@@ -1,21 +1,22 @@
 var grunt;
 
-var Dist = {
+var Release = {
 	config:{
-		directory: ''
+		directory: null,
+        destination: null
 	},
     init: function(_grunt) {
         grunt = _grunt;
         this.config.directory = grunt.option('projectFolder');
+        this.config.destination = grunt.option('destination');
         this.loadNPMTasks(grunt);
         this.registerTasks(grunt);
     },
     loadNPMTasks: function () {
     	grunt.loadNpmTasks('grunt-replace');
-        console.log('task');
+         grunt.loadNpmTasks('grunt-shell-spawn');
     },
     getConfig: function() {
-        console.log(this.config.directory);
         return {
             replace: {
                 bower: {
@@ -29,7 +30,7 @@ var Dist = {
                         cwd: this.config.directory,
                         expand: true,
                         src: ['**/*.{html,xhtml,htm,js,css}', '!bower_components/**', '!**/node_modules/**', '!**/lib/**', '!**/Gruntfile.js'],
-                        dest: this.config.directory + '/Dist'
+                        dest: this.config.destination ? this.config.destination : this.config.directory + '/Release'
                     }]
                 }
             }
@@ -43,4 +44,4 @@ var Dist = {
     	grunt.registerTask('dist',['replace']); 
     }
 };
-module.exports = Dist;
+module.exports = Release;

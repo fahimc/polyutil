@@ -6,6 +6,7 @@ var path = require('path');
 var PolyUtil = {
     COMMAND_PATH: 'src/command/',
     init: function() {
+        console.log('init');
         this.checkCommand();
     },
     checkCommand: function() {
@@ -24,6 +25,7 @@ var PolyUtil = {
     getCommand: function(commandName) {
         var Command;
         try {
+            console.log(__dirname, this.COMMAND_PATH + commandName + 'Command.js');
             Command = require(path.join(__dirname, this.COMMAND_PATH + commandName + 'Command.js'));
         } catch (e) {
             console.log(e);

@@ -5,7 +5,8 @@ var Main = {
     modulesPath: "src/module/grunt/"
   },
   modules: [
-    "Dist"
+    "Dist",
+    "Release"
   ],
   gruntConfig: {},
   init: function (grunt) {
