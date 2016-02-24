@@ -25,10 +25,8 @@ var PolyUtil = {
     getCommand: function(commandName) {
         var Command;
         try {
-            console.log(__dirname, this.COMMAND_PATH + commandName + 'Command.js');
             Command = require(path.join(__dirname, this.COMMAND_PATH + commandName + 'Command.js'));
         } catch (e) {
-            console.log(e);
             Logger.warn(process.argv[2] + ' command not found');
         }
         return Command;

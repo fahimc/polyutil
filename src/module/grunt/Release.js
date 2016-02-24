@@ -1,6 +1,6 @@
 var grunt;
 
-var Dist = {
+var Release = {
 	config:{
 		directory: null,
     destination: null
@@ -31,7 +31,7 @@ var Dist = {
           cwd: this.config.directory,
           expand: true,
           src: ['**/*.{html,xhtml,htm,js,css}', '!bower_components/**', '!**/node_modules/**', '!**/lib/**', '!**/Gruntfile.js'],
-          dest: this.config.destination ? this.config.destination : this.config.directory + '/Dist'
+          dest: this.config.directory
         }]
       }
     },
@@ -115,7 +115,7 @@ var Dist = {
             else {
               grunt.option("versionNumber", stdOutStr);
               grunt.log.writeln("Tags found");
-              Dist.bumpVersionNumber();
+              Release.bumpVersionNumber();
             }
             done();
           }
@@ -202,7 +202,7 @@ bumpVersionNumber: function () {
     break;
   }
   grunt.option("versionNumber", arr.join("."));
-  Logger.ok("New tag created " + arr.join("."));
+  grunt.log.ok("New tag created " + arr.join("."));
 },
 registerTasks: function () {
   for (var key in this.customTasks) {
@@ -219,4 +219,4 @@ registerTasks: function () {
     grunt.registerTask('release', ['pullMergeRelease', 'replace', 'releaseCommit', 'tagPush', 'shell:getMasterBranch']);
   }
 };
-module.exports = Dist;
+module.exports = Release;
