@@ -178,6 +178,27 @@ customTasks: {
     }
   },
 },
+updatePackageJson: function () {
+  var done = this.async();
+  var project = grunt.option('projectFolder') || './';
+  if (grunt.file.exists(project + '/package.json')) {
+    var packageJson = grunt.file.readJSON(project + '/package.json');
+    packageJson['version'] = grunt.option("versionNumber");
+    grunt.file.write(project + '/package.json', JSON.stringify(packageJson, null, 2));
+    grunt.task.run('shell:commitReleaseBranch');
+    grunt.task.run('shell:pushReleaseBranch');
+    done();
+  }
+  else {
+    done();
+  }
+}
+},
+checkReplace: function() {
+  if (!grunt.option("dont-replace")) {
+   grunt.task.run('replace:bower');
+ }
+},
 bumpVersionNumber: function () {
   var type = "patch";
   if (grunt.option("minor")) {
@@ -212,11 +233,11 @@ registerTasks: function () {
 
   grunt.registerTask('releaseCommit', ['force:on', 'shell:commitReleaseBranch', 'force:off']);
 
-  grunt.registerTask('tagPush', ['shell:fetchTags', 'force:on', 'shell:getLatestTag', 'shell:deleteLocalTag', 'force:off', 'shell:createReleaseTag', 'shell:pushReleaseBranch', 'shell:pushReleaseTag']);
+  grunt.registerTask('tagPush', ['shell:fetchTags', 'force:on', 'shell:getLatestTag', 'updatePackageJson',  'shell:deleteLocalTag', 'force:off', 'shell:createReleaseTag', 'shell:pushReleaseBranch', 'shell:pushReleaseTag']);
 
 
     //register standard tasks
-    grunt.registerTask('release', ['pullMergeRelease', 'replace', 'releaseCommit', 'tagPush', 'shell:getMasterBranch']);
+    grunt.registerTask('release', ['pullMergeRelease', 'checkReplace', 'releaseCommit', 'tagPush', 'shell:getMasterBranch']);
   }
 };
 module.exports = Release;
