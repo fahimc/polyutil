@@ -6,7 +6,6 @@ var path = require('path');
 var PolyUtil = {
     COMMAND_PATH: 'src/command/',
     init: function() {
-        console.log('init');
         this.checkCommand();
     },
     checkCommand: function() {
@@ -19,7 +18,7 @@ var PolyUtil = {
     execute: function(Command) {
         Command.execute({
             projectFolder: process.cwd(),
-            options: process.argv.splice(0,2)
+            options: process.argv.slice(3)
         });
     },
     getCommand: function(commandName) {
@@ -27,6 +26,7 @@ var PolyUtil = {
         try {
             Command = require(path.join(__dirname, this.COMMAND_PATH + commandName + 'Command.js'));
         } catch (e) {
+            console.log(e);
             Logger.warn(process.argv[2] + ' command not found');
         }
         return Command;
