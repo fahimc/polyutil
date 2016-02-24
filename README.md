@@ -14,5 +14,7 @@ This will create and launch a web server
 
 ##polyutil release
 
-This will merge your master branch with the release branch and convert all the bower_components references to point outward and push all the changes and finally create a new tag.
+This will merge your master branch with the release branch and convert all the bower_components references to point outward and push all the changes and finally create a new tag. This task will also update the verison number in the package.json if you have that file.
 
+##polyutil release -dont-replace
+This will ignore the replace bower_components task.
